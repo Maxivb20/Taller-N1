@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Check-in QR · ClubTrack</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div id="toast-area" style="position:fixed; top:16px; right:16px; z-index:2000;"></div>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="mark">CT</span><span class="name">ClubTrack</span>
+      <span class="sub">Gestión de membresías y asistencia</span>
+    </div>
+    <nav>
+      <div class="nav-section-label">PRINCIPAL</div>
+      <a href="index.html" class="nav-link"><i class="bi bi-speedometer2"></i> Dashboard</a>
+      <a href="qr.html" class="nav-link"><i class="bi bi-qr-code"></i> Check-in QR</a>
+      <div class="nav-section-label">CLUB</div>
+      <a href="socios.html" class="nav-link"><i class="bi bi-people"></i> Socios</a>
+      <a href="planes.html" class="nav-link"><i class="bi bi-card-list"></i> Planes</a>
+      <a href="membresias.html" class="nav-link"><i class="bi bi-patch-check"></i> Membresías</a>
+      <a href="actividades.html" class="nav-link"><i class="bi bi-calendar-week"></i> Actividades</a>
+      <div class="nav-section-label">CONTROL</div>
+      <a href="asistencia.html" class="nav-link"><i class="bi bi-clipboard-check"></i> Asistencia</a>
+      <a href="pagos.html" class="nav-link"><i class="bi bi-cash-coin"></i> Pagos</a>
+      <a href="vencimientos.html" class="nav-link"><i class="bi bi-exclamation-triangle"></i> Vencimientos</a>
+    </nav>
+    <div class="foot">ClubTrack v1.0<br>Proyecto académico</div>
+  </aside>
+
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <div class="kicker">Principal</div>
+        <h1>Check-in móvil por QR</h1>
+        <p class="lead-sub">Cada socio tiene una credencial QR única. El recepcionista la valida al ingreso.</p>
+      </div>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-lg-5">
+        <div class="card-flat p-3 h-100">
+          <h3>Credencial del socio</h3>
+          <p class="text-steel" style="font-size:0.85rem;">Selecciona un socio para mostrar su código QR de acceso, como se vería en su celular.</p>
+          <select class="form-select form-club mb-3" id="credencial-socio"></select>
+          <div class="text-center">
+            <div id="qrcode-preview" style="display:inline-block;"></div>
+          </div>
+          <p class="text-center text-steel mt-2" style="font-size:0.78rem;" id="credencial-id"></p>
+        </div>
+      </div>
+
+      <div class="col-lg-7">
+        <div class="card-flat p-3 h-100">
+          <h3>Lector en recepción</h3>
+          <p class="text-steel" style="font-size:0.85rem;">
+            Simulación del lector: en un celular real, la cámara decodifica el QR automáticamente.
+            Aquí, ingresa o pega el código leído para validar el ingreso.
+          </p>
+
+          <div class="scanner-frame mb-3">
+            <span class="corner tl"></span><span class="corner tr"></span>
+            <span class="corner bl"></span><span class="corner br"></span>
+            <i class="bi bi-qr-code-scan" style="font-size:3rem; color:#F4F1EA;"></i>
+          </div>
+
+          <form id="form-scan" class="form-club">
+            <div class="row g-2 align-items-end">
+              <div class="col-md-6">
+                <label>Código escaneado</label>
+                <input type="text" class="form-control" id="scan-input" placeholder="Ej: S001" required>
+              </div>
+              <div class="col-md-4">
+                <label>Actividad</label>
+                <select class="form-select" id="scan-actividad"></select>
+              </div>
+              <div class="col-md-2">
+                <button type="submit" class="btn btn-club w-100">Validar</button>
+              </div>
+            </div>
+          </form>
+
+          <div id="scan-result" class="scan-result"></div>
+
+          <hr class="my-3">
+          <p class="text-steel mb-2" style="font-size:0.8rem;">Acceso rápido (equivale a escanear la credencial de):</p>
+          <div id="accesos-rapidos" class="d-flex flex-wrap gap-2"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/qr.js"></script>
+</body>
+</html>
