@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Actividades · ClubTrack</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div id="toast-area" style="position:fixed; top:16px; right:16px; z-index:2000;"></div>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="mark">CT</span><span class="name">ClubTrack</span>
+      <span class="sub">Gestión de membresías y asistencia</span>
+    </div>
+    <nav>
+      <div class="nav-section-label">PRINCIPAL</div>
+      <a href="index.html" class="nav-link"><i class="bi bi-speedometer2"></i> Dashboard</a>
+      <a href="qr.html" class="nav-link"><i class="bi bi-qr-code"></i> Check-in QR</a>
+      <div class="nav-section-label">CLUB</div>
+      <a href="socios.html" class="nav-link"><i class="bi bi-people"></i> Socios</a>
+      <a href="planes.html" class="nav-link"><i class="bi bi-card-list"></i> Planes</a>
+      <a href="membresias.html" class="nav-link"><i class="bi bi-patch-check"></i> Membresías</a>
+      <a href="actividades.html" class="nav-link"><i class="bi bi-calendar-week"></i> Actividades</a>
+      <div class="nav-section-label">CONTROL</div>
+      <a href="asistencia.html" class="nav-link"><i class="bi bi-clipboard-check"></i> Asistencia</a>
+      <a href="pagos.html" class="nav-link"><i class="bi bi-cash-coin"></i> Pagos</a>
+      <a href="vencimientos.html" class="nav-link"><i class="bi bi-exclamation-triangle"></i> Vencimientos</a>
+    </nav>
+    <div class="foot">ClubTrack v1.0<br>Proyecto académico</div>
+  </aside>
+
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <div class="kicker">Club</div>
+        <h1>Actividades</h1>
+        <p class="lead-sub">Clases y espacios del club, con su instructor y horario.</p>
+      </div>
+      <button class="btn btn-amber" onclick="abrirNuevaActividad()"><i class="bi bi-plus-lg me-1"></i>Nueva actividad</button>
+    </div>
+
+    <div class="row g-3" id="grid-actividades"></div>
+  </main>
+</div>
+
+<div class="modal fade" id="modalActividad" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalActividadTitulo">Nueva actividad</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <form id="form-actividad" class="form-club">
+        <div class="modal-body">
+          <input type="hidden" id="actividad-id">
+          <div class="mb-3">
+            <label>Nombre</label>
+            <input type="text" class="form-control" id="actividad-nombre" required>
+          </div>
+          <div class="mb-3">
+            <label>Instructor</label>
+            <input type="text" class="form-control" id="actividad-instructor">
+          </div>
+          <div class="mb-3">
+            <label>Horario</label>
+            <input type="text" class="form-control" id="actividad-horario" placeholder="Lun / Mié / Vie · 19:00">
+          </div>
+          <div class="mb-1">
+            <label>Cupo</label>
+            <input type="number" min="1" class="form-control" id="actividad-cupo" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-club" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-club">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/actividades.js"></script>
+</body>
+</html>

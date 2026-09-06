@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pagos · ClubTrack</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div id="toast-area" style="position:fixed; top:16px; right:16px; z-index:2000;"></div>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="mark">CT</span><span class="name">ClubTrack</span>
+      <span class="sub">Gestión de membresías y asistencia</span>
+    </div>
+    <nav>
+      <div class="nav-section-label">PRINCIPAL</div>
+      <a href="index.html" class="nav-link"><i class="bi bi-speedometer2"></i> Dashboard</a>
+      <a href="qr.html" class="nav-link"><i class="bi bi-qr-code"></i> Check-in QR</a>
+      <div class="nav-section-label">CLUB</div>
+      <a href="socios.html" class="nav-link"><i class="bi bi-people"></i> Socios</a>
+      <a href="planes.html" class="nav-link"><i class="bi bi-card-list"></i> Planes</a>
+      <a href="membresias.html" class="nav-link"><i class="bi bi-patch-check"></i> Membresías</a>
+      <a href="actividades.html" class="nav-link"><i class="bi bi-calendar-week"></i> Actividades</a>
+      <div class="nav-section-label">CONTROL</div>
+      <a href="asistencia.html" class="nav-link"><i class="bi bi-clipboard-check"></i> Asistencia</a>
+      <a href="pagos.html" class="nav-link"><i class="bi bi-cash-coin"></i> Pagos</a>
+      <a href="vencimientos.html" class="nav-link"><i class="bi bi-exclamation-triangle"></i> Vencimientos</a>
+    </nav>
+    <div class="foot">ClubTrack v1.0<br>Proyecto académico</div>
+  </aside>
+
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <div class="kicker">Control</div>
+        <h1>Pagos</h1>
+        <p class="lead-sub">Registro de pagos asociados a cada membresía.</p>
+      </div>
+      <button class="btn btn-amber" onclick="abrirNuevoPago()"><i class="bi bi-plus-lg me-1"></i>Registrar pago</button>
+    </div>
+
+    <div class="row g-3 mb-3">
+      <div class="col-sm-4">
+        <div class="stat-card">
+          <div class="label">Recaudado este mes</div>
+          <div class="value" id="stat-recaudado">—</div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="stat-card alert">
+          <div class="label">Pendiente de pago</div>
+          <div class="value" id="stat-pendiente">—</div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="stat-card steel">
+          <div class="label">Pagos registrados</div>
+          <div class="value" id="stat-total-pagos">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-flat p-3 mb-3">
+      <select class="form-select form-club" id="filtro-pago-estado" style="max-width:220px;">
+        <option value="">Todos los pagos</option>
+        <option value="pagado">Pagados</option>
+        <option value="pendiente">Pendientes</option>
+      </select>
+    </div>
+
+    <div class="card-flat p-0">
+      <div class="table-responsive">
+        <table class="table-club">
+          <thead><tr><th>Socio</th><th>Fecha</th><th>Monto</th><th>Método</th><th>Estado</th><th></th></tr></thead>
+          <tbody id="tabla-pagos"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="modal fade" id="modalPago" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Registrar pago</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <form id="form-pago" class="form-club">
+        <div class="modal-body">
+          <div class="mb-3">
+            <label>Socio</label>
+            <select class="form-select" id="pago-socio" required></select>
+          </div>
+          <div class="mb-3">
+            <label>Membresía asociada</label>
+            <select class="form-select" id="pago-membresia" required></select>
+          </div>
+          <div class="row">
+            <div class="col-6 mb-3">
+              <label>Monto (CLP)</label>
+              <input type="number" min="0" class="form-control" id="pago-monto" required>
+            </div>
+            <div class="col-6 mb-3">
+              <label>Método</label>
+              <select class="form-select" id="pago-metodo">
+                <option>Transferencia</option>
+                <option>Débito</option>
+                <option>Crédito</option>
+                <option>Efectivo</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-club" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-club">Registrar pago</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/pagos.js"></script>
+</body>
+</html>

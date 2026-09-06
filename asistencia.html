@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asistencia · ClubTrack</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div id="toast-area" style="position:fixed; top:16px; right:16px; z-index:2000;"></div>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="mark">CT</span><span class="name">ClubTrack</span>
+      <span class="sub">Gestión de membresías y asistencia</span>
+    </div>
+    <nav>
+      <div class="nav-section-label">PRINCIPAL</div>
+      <a href="index.html" class="nav-link"><i class="bi bi-speedometer2"></i> Dashboard</a>
+      <a href="qr.html" class="nav-link"><i class="bi bi-qr-code"></i> Check-in QR</a>
+      <div class="nav-section-label">CLUB</div>
+      <a href="socios.html" class="nav-link"><i class="bi bi-people"></i> Socios</a>
+      <a href="planes.html" class="nav-link"><i class="bi bi-card-list"></i> Planes</a>
+      <a href="membresias.html" class="nav-link"><i class="bi bi-patch-check"></i> Membresías</a>
+      <a href="actividades.html" class="nav-link"><i class="bi bi-calendar-week"></i> Actividades</a>
+      <div class="nav-section-label">CONTROL</div>
+      <a href="asistencia.html" class="nav-link"><i class="bi bi-clipboard-check"></i> Asistencia</a>
+      <a href="pagos.html" class="nav-link"><i class="bi bi-cash-coin"></i> Pagos</a>
+      <a href="vencimientos.html" class="nav-link"><i class="bi bi-exclamation-triangle"></i> Vencimientos</a>
+    </nav>
+    <div class="foot">ClubTrack v1.0<br>Proyecto académico</div>
+  </aside>
+
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <div class="kicker">Control</div>
+        <h1>Asistencia</h1>
+        <p class="lead-sub">Registro manual de check-in y consulta del historial diario.</p>
+      </div>
+      <a href="qr.html" class="btn btn-outline-club"><i class="bi bi-qr-code me-1"></i>Ir a check-in por QR</a>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-lg-4">
+        <div class="card-flat p-3">
+          <h3>Registrar check-in manual</h3>
+          <form id="form-checkin" class="form-club">
+            <div class="mb-3">
+              <label>Socio</label>
+              <select class="form-select" id="checkin-socio" required></select>
+            </div>
+            <div class="mb-3">
+              <label>Actividad</label>
+              <select class="form-select" id="checkin-actividad" required></select>
+            </div>
+            <div id="checkin-alerta" class="mb-3" style="display:none;"></div>
+            <button type="submit" class="btn btn-club w-100"><i class="bi bi-check2-square me-1"></i>Registrar asistencia</button>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card-flat p-3 h-100">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h3 class="mb-0">Historial de asistencia</h3>
+            <input type="date" class="form-control form-club" id="filtro-fecha" style="max-width:180px;">
+          </div>
+          <div class="table-responsive">
+            <table class="table-club">
+              <thead><tr><th>Socio</th><th>Actividad</th><th>Hora</th><th>Método</th></tr></thead>
+              <tbody id="tabla-asistencia"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/asistencia.js"></script>
+</body>
+</html>

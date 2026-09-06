@@ -1,0 +1,431 @@
+/* =========================================================
+   ClubTrack — Sistema de Gestión de Membresías y Asistencia
+   Identidad visual: "pizarra de marcador" de un club deportivo.
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --ink: #14181C;
+  --ink-soft: #1E262D;
+  --ink-soft-2: #29333B;
+  --chalk: #F4F1EA;
+  --chalk-dim: #E8E3D6;
+  --paper: #FFFFFF;
+  --court: #2F6844;
+  --court-light: #DCEAE1;
+  --court-dark: #1F4A31;
+  --amber: #E0932F;
+  --amber-light: #FBEAD0;
+  --alert: #BD4438;
+  --alert-light: #F6DBD6;
+  --steel: #6B7280;
+  --steel-light: #98A0A8;
+  --line: #DCD6C8;
+  --radius-card: 4px;
+  --radius-pill: 999px;
+  --shadow-scoreboard: 0 1px 0 rgba(20,24,28,0.06);
+}
+
+*{ box-sizing: border-box; }
+
+html, body{
+  height: 100%;
+}
+
+body{
+  background: var(--chalk);
+  color: var(--ink);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.display, h1, h2, h3, .scoreboard-num{
+  font-family: 'Bebas Neue', 'Inter', sans-serif;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+h1{ font-size: 2.4rem; line-height: 1.05; }
+h2{ font-size: 1.6rem; line-height: 1.1; }
+h3{ font-size: 1.2rem; line-height: 1.15; }
+
+a{ color: var(--court-dark); text-decoration: none; }
+a:hover{ color: var(--court); }
+
+/* ---------- Layout: cancha (sidebar + main) ---------- */
+
+.app-shell{
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar{
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--ink);
+  color: var(--chalk-dim);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar .brand{
+  padding: 0 24px 20px 24px;
+  border-bottom: 1px solid rgba(244,241,234,0.1);
+  margin-bottom: 12px;
+}
+
+.sidebar .brand .mark{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px; height: 34px;
+  background: var(--amber);
+  color: var(--ink);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  border-radius: 3px;
+  margin-right: 8px;
+}
+
+.sidebar .brand .name{
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  color: var(--paper);
+  letter-spacing: 0.03em;
+  vertical-align: middle;
+}
+
+.sidebar .brand .sub{
+  display: block;
+  font-size: 0.72rem;
+  color: var(--steel-light);
+  margin-top: 4px;
+  letter-spacing: 0.02em;
+}
+
+.sidebar nav{
+  flex: 1;
+  padding: 8px 12px;
+}
+
+.sidebar .nav-section-label{
+  font-size: 0.68rem;
+  color: var(--steel-light);
+  padding: 14px 12px 6px 12px;
+  letter-spacing: 0.06em;
+}
+
+.sidebar a.nav-link{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--chalk-dim);
+  padding: 9px 12px;
+  border-radius: 4px;
+  font-size: 0.92rem;
+  margin-bottom: 2px;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.sidebar a.nav-link i{ font-size: 1rem; width: 18px; text-align: center; color: var(--steel-light); }
+
+.sidebar a.nav-link:hover{
+  background: rgba(244,241,234,0.06);
+  color: var(--paper);
+}
+
+.sidebar a.nav-link.active{
+  background: var(--amber);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.sidebar a.nav-link.active i{ color: var(--ink); }
+
+.sidebar .foot{
+  padding: 12px 24px 0 24px;
+  border-top: 1px solid rgba(244,241,234,0.1);
+  font-size: 0.72rem;
+  color: var(--steel-light);
+}
+
+.main{
+  flex: 1;
+  min-width: 0;
+  padding: 28px 34px 60px 34px;
+}
+
+.page-header{
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.page-header .kicker{
+  font-size: 0.78rem;
+  color: var(--steel);
+  margin-bottom: 2px;
+}
+
+.page-header p.lead-sub{
+  color: var(--steel);
+  margin: 4px 0 0 0;
+  font-size: 0.92rem;
+}
+
+/* ---------- Tarjetas ---------- */
+
+.card-flat{
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+}
+
+.stat-card{
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--court);
+  border-radius: var(--radius-card);
+  padding: 16px 18px;
+}
+
+.stat-card.amber{ border-left-color: var(--amber); }
+.stat-card.alert{ border-left-color: var(--alert); }
+.stat-card.steel{ border-left-color: var(--steel); }
+
+.stat-card .label{
+  font-size: 0.75rem;
+  color: var(--steel);
+  text-transform: none;
+  margin-bottom: 6px;
+}
+
+.stat-card .value{
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.1rem;
+  line-height: 1;
+}
+
+.stat-card .delta{
+  font-size: 0.78rem;
+  color: var(--steel);
+  margin-top: 4px;
+}
+
+/* ---------- Tablas tipo "planilla de club" ---------- */
+
+.table-club{
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--paper);
+}
+
+.table-club thead th{
+  background: var(--ink);
+  color: var(--chalk-dim);
+  font-weight: 600;
+  font-size: 0.74rem;
+  letter-spacing: 0.03em;
+  padding: 10px 14px;
+  text-align: left;
+  border: none;
+}
+
+.table-club tbody td{
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.table-club tbody tr:hover{ background: var(--chalk); }
+
+.table-club tbody tr:last-child td{ border-bottom: none; }
+
+/* ---------- Badges de estado ---------- */
+
+.badge-estado{
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.74rem;
+  font-weight: 600;
+}
+
+.badge-estado::before{
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.badge-activa{ background: var(--court-light); color: var(--court-dark); }
+.badge-por_vencer{ background: var(--amber-light); color: #8A5A16; }
+.badge-vencida{ background: var(--alert-light); color: var(--alert); }
+.badge-pagado{ background: var(--court-light); color: var(--court-dark); }
+.badge-pendiente{ background: var(--amber-light); color: #8A5A16; }
+
+/* ---------- Botones ---------- */
+
+.btn-club{
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  border-radius: 3px;
+  padding: 9px 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: background 0.12s ease;
+}
+.btn-club:hover{ background: var(--ink-soft-2); color: var(--paper); }
+
+.btn-amber{
+  background: var(--amber);
+  color: var(--ink);
+  border: none;
+  border-radius: 3px;
+  padding: 9px 16px;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+.btn-amber:hover{ background: #cf8526; color: var(--ink); }
+
+.btn-outline-club{
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  border-radius: 3px;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.btn-outline-club:hover{ background: var(--chalk-dim); }
+
+.btn-ghost-sm{
+  background: transparent;
+  border: none;
+  color: var(--steel);
+  font-size: 0.82rem;
+  padding: 4px 6px;
+}
+.btn-ghost-sm:hover{ color: var(--ink); }
+
+/* ---------- Formularios ---------- */
+
+.form-club label{
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+}
+
+.form-club .form-control, .form-club .form-select{
+  border-radius: 3px;
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  font-size: 0.9rem;
+}
+
+.form-club .form-control:focus, .form-club .form-select:focus{
+  border-color: var(--court);
+  box-shadow: 0 0 0 3px var(--court-light);
+}
+
+/* ---------- Modales ---------- */
+
+.modal-content{
+  border-radius: 4px;
+  border: none;
+}
+.modal-header{
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 4px 4px 0 0;
+}
+.modal-header .btn-close{ filter: invert(1); }
+
+/* ---------- QR / Check-in ---------- */
+
+.scanner-frame{
+  width: 260px;
+  height: 260px;
+  margin: 0 auto;
+  position: relative;
+  background: var(--ink);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scanner-frame .corner{
+  position: absolute;
+  width: 34px; height: 34px;
+  border-color: var(--amber);
+  border-style: solid;
+  border-width: 0;
+}
+.scanner-frame .tl{ top: 14px; left: 14px; border-top-width: 4px; border-left-width: 4px; }
+.scanner-frame .tr{ top: 14px; right: 14px; border-top-width: 4px; border-right-width: 4px; }
+.scanner-frame .bl{ bottom: 14px; left: 14px; border-bottom-width: 4px; border-left-width: 4px; }
+.scanner-frame .br{ bottom: 14px; right: 14px; border-bottom-width: 4px; border-right-width: 4px; }
+
+.scanner-frame #qrcode-preview{ background: var(--paper); padding: 10px; border-radius: 4px; }
+
+.scan-result{
+  border-radius: 4px;
+  padding: 16px 18px;
+  margin-top: 18px;
+  display: none;
+}
+.scan-result.ok{ background: var(--court-light); border: 1px solid var(--court); display: block; }
+.scan-result.fail{ background: var(--alert-light); border: 1px solid var(--alert); display: block; }
+
+/* ---------- Utilidades ---------- */
+
+.text-steel{ color: var(--steel); }
+.text-court{ color: var(--court-dark); }
+.text-alert{ color: var(--alert); }
+.bar-track{ background: var(--chalk-dim); border-radius: 3px; height: 8px; overflow: hidden; }
+.bar-fill{ background: var(--court); height: 100%; }
+
+.empty-state{
+  text-align: center;
+  padding: 50px 20px;
+  color: var(--steel);
+}
+.empty-state i{ font-size: 2rem; color: var(--steel-light); margin-bottom: 10px; display: block; }
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px){
+  .app-shell{ flex-direction: column; }
+  .sidebar{
+    width: 100%;
+    height: auto;
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 16px;
+    overflow-x: auto;
+  }
+  .sidebar .brand{ border: none; padding: 0 16px 0 0; margin: 0; }
+  .sidebar nav{ display: flex; padding: 0; gap: 4px; flex: none; }
+  .sidebar .nav-section-label{ display: none; }
+  .sidebar a.nav-link{ white-space: nowrap; margin-bottom: 0; }
+  .sidebar .foot{ display: none; }
+  .main{ padding: 20px 16px 40px 16px; }
+}
