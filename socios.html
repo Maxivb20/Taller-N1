@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Socios · ClubTrack</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div id="toast-area" style="position:fixed; top:16px; right:16px; z-index:2000;"></div>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="mark">CT</span><span class="name">ClubTrack</span>
+      <span class="sub">Gestión de membresías y asistencia</span>
+    </div>
+    <nav>
+      <div class="nav-section-label">PRINCIPAL</div>
+      <a href="index.html" class="nav-link"><i class="bi bi-speedometer2"></i> Dashboard</a>
+      <a href="qr.html" class="nav-link"><i class="bi bi-qr-code"></i> Check-in QR</a>
+      <div class="nav-section-label">CLUB</div>
+      <a href="socios.html" class="nav-link"><i class="bi bi-people"></i> Socios</a>
+      <a href="planes.html" class="nav-link"><i class="bi bi-card-list"></i> Planes</a>
+      <a href="membresias.html" class="nav-link"><i class="bi bi-patch-check"></i> Membresías</a>
+      <a href="actividades.html" class="nav-link"><i class="bi bi-calendar-week"></i> Actividades</a>
+      <div class="nav-section-label">CONTROL</div>
+      <a href="asistencia.html" class="nav-link"><i class="bi bi-clipboard-check"></i> Asistencia</a>
+      <a href="pagos.html" class="nav-link"><i class="bi bi-cash-coin"></i> Pagos</a>
+      <a href="vencimientos.html" class="nav-link"><i class="bi bi-exclamation-triangle"></i> Vencimientos</a>
+    </nav>
+    <div class="foot">ClubTrack v1.0<br>Proyecto académico</div>
+  </aside>
+
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <div class="kicker">Club</div>
+        <h1>Socios</h1>
+        <p class="lead-sub">Ficha, contacto y estado de membresía de cada socio.</p>
+      </div>
+      <button class="btn btn-amber" data-bs-toggle="modal" data-bs-target="#modalSocio" onclick="abrirNuevoSocio()">
+        <i class="bi bi-person-plus me-1"></i>Nuevo socio
+      </button>
+    </div>
+
+    <div class="card-flat p-3 mb-3">
+      <div class="row g-2">
+        <div class="col-md-6">
+          <input type="text" class="form-control form-club" id="buscar-socio" placeholder="Buscar por nombre o email...">
+        </div>
+        <div class="col-md-4">
+          <select class="form-select form-club" id="filtro-estado">
+            <option value="">Todos los estados</option>
+            <option value="activa">Activa</option>
+            <option value="por_vencer">Por vencer</option>
+            <option value="vencida">Vencida</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-outline-club w-100" onclick="renderSocios()"><i class="bi bi-funnel"></i> Filtrar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-flat p-0">
+      <div class="table-responsive">
+        <table class="table-club">
+          <thead>
+            <tr>
+              <th>Socio</th><th>Contacto</th><th>Ingreso</th><th>Plan actual</th><th>Estado</th><th>Vence</th><th></th>
+            </tr>
+          </thead>
+          <tbody id="tabla-socios"></tbody>
+        </table>
+      </div>
+      <div id="socios-empty" class="empty-state" style="display:none;">
+        <i class="bi bi-people"></i>
+        No se encontraron socios con ese filtro.
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal alta/edición de socio -->
+<div class="modal fade" id="modalSocio" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalSocioTitulo">Nuevo socio</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <form id="form-socio" class="form-club">
+        <div class="modal-body">
+          <input type="hidden" id="socio-id">
+          <div class="mb-3">
+            <label>Nombre completo</label>
+            <input type="text" class="form-control" id="socio-nombre" required>
+          </div>
+          <div class="mb-3">
+            <label>Correo electrónico</label>
+            <input type="email" class="form-control" id="socio-email" required>
+          </div>
+          <div class="mb-3">
+            <label>Teléfono</label>
+            <input type="text" class="form-control" id="socio-telefono" placeholder="+56 9 ...">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-club" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-club">Guardar socio</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/socios.js"></script>
+</body>
+</html>
