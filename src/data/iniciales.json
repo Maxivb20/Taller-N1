@@ -1,0 +1,6 @@
+{
+  "socios": [
+    { "id": 1, "nombre": "Juan Pérez", "plan": "Mensual Full", "estado": "Activa", "vencimiento": "2026-10-15" },
+    { "id": 2, "nombre": "María Loayza", "plan": "Anual", "estado": "Vencida", "vencimiento": "2026-09-01" }
+  ]
+}
