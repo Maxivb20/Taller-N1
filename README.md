@@ -1,140 +1,233 @@
-# ClubTrack — Gestión de Membresías y Asistencia
+# ClubTrack — Frontend (React + Vite)
 
-Proyecto frontend desarrollado para la Actividad Evaluada 1 (Desarrollo de Interfaz
-Frontend). Es una interfaz web funcional dirigida a academias, gimnasios pequeños,
-clubes y escuelas deportivas, que resuelve la gestión de socios, planes,
-membresías, pagos, actividades y control de asistencia mediante check-in (manual
-y por QR).
+Aplicación web de gestión para un club/gimnasio. Permite administrar socios, planes,
+membresías, pagos, actividades y asistencia, con un check-in por código QR y un tablero
+general con métricas.
 
-No existe backend: todos los datos se simulan en el navegador con `localStorage`,
-tal como permiten las bases de la actividad. Al abrir la aplicación por primera
-vez se cargan datos de ejemplo (socios, planes, membresías, pagos y asistencias)
-para poder demostrar el flujo completo sin configuración previa.
+Proyecto de **Taller Evaluado N°2 (Desarrollo Web II)**. Es la migración a **React** de la
+Actividad 1 (que estaba hecha con HTML, CSS, Bootstrap y JavaScript vanilla).
 
-## Tecnologías utilizadas
+---
 
-- HTML5 semántico
-- CSS3 (sistema de diseño propio en `css/styles.css`)
-- Bootstrap 5.3 (grillas, modales, formularios, componentes)
-- JavaScript (ES6+, sin frameworks) para toda la lógica e interacción
-- Chart.js para el gráfico de asistencia del dashboard
-- QRCode.js para la generación de credenciales QR
-- Git, GitHub y Git Flow para el control de versiones
+## 📌 Problemática
 
-## Estructura del proyecto
+Muchos clubes y gimnasios pequeños administran su operación con planillas sueltas o cuadernos.
+Esto provoca dificultad para saber **quién está al día**, **pérdida de control de la morosidad**,
+registro de asistencia **manual y poco confiable** y demoras en recepción al validar cada ingreso.
 
-```
-gestion-membresias/
-├── index.html               Dashboard: KPIs, gráfico de asistencia, estado general
-├── socios.html               Listado y CRUD de socios
-├── socio-historial.html      Ficha con historial de membresías, pagos y asistencia
-├── planes.html                CRUD de planes de membresía
-├── membresias.html            Control de vigencia, renovación y alta de membresías
-├── pagos.html                  Registro de pagos y morosidad
-├── actividades.html           CRUD de actividades/clases del club
-├── asistencia.html            Check-in manual + historial diario
-├── qr.html                     Credencial QR por socio + lector de check-in
-├── vencimientos.html          Vista consolidada de por vencer / vencidas / morosidad
-├── css/
-│   └── styles.css             Sistema de diseño (tokens, componentes)
-├── js/
-│   ├── data.js                 Datos simulados + acceso a localStorage + reglas de negocio
-│   ├── main.js                  Utilidades comunes (toasts, sidebar activo, helpers)
-│   └── *.js                     Lógica específica de cada página
-└── README.md
-```
+**ClubTrack** centraliza la gestión y agrega un **check-in por QR** para agilizar el acceso.
 
-## Módulos y funciones cubiertas
+## 👤 Usuarios objetivo
 
-| Módulo        | Dónde                               |
-|---------------|--------------------------------------|
-| Socios        | `socios.html`, `socio-historial.html` |
-| Planes        | `planes.html`                        |
-| Membresías    | `membresias.html`                    |
-| Pagos         | `pagos.html`                         |
-| Actividades   | `actividades.html`                   |
-| Asistencia    | `asistencia.html`                    |
-| QR            | `qr.html`                             |
-| Vencimientos  | `vencimientos.html`                  |
+- **Administrador**: gestiona socios, planes, membresías y pagos, y revisa las métricas del club.
+- **Recepción / Staff**: registra ingresos (QR o manual) y confirma pagos rápidamente.
 
-Funciones de profundidad implementadas:
+## ✅ Funcionalidades principales
 
-- **Check-in móvil**: `qr.html` genera una credencial QR por socio y simula el
-  lector de recepción (valida el código, revisa vigencia y registra la asistencia).
-- **Estado de membresía**: badges de *Activa / Por vencer / Vencida* calculados
-  en tiempo real según la fecha de término (`estadoMembresia()` en `data.js`).
-- **Control de vigencia**: el check-in manual y por QR bloquea el ingreso si la
-  membresía está vencida.
-- **Dashboard de asistencia**: gráfico de los últimos 7 días y distribución de
-  estados de membresía en `index.html`.
-- **Listado de morosidad/vencimientos**: `vencimientos.html` concentra próximos
-  a vencer, vencidas y pagos pendientes.
-- **Historial del socio**: `socio-historial.html` reúne membresías, pagos y
-  asistencia de un socio específico.
+- **Dashboard**: métricas (activos, por vencer, morosidad, check-ins del día), gráfico de
+  asistencia de los últimos 7 días y widget de clima.
+- **Socios**: padrón con búsqueda, filtro por estado, alta/edición/baja y ficha de historial.
+- **Planes** y **Actividades**: catálogo con CRUD y ocupación por actividad.
+- **Membresías**: alta y renovación con control de vigencia y generación de pago pendiente.
+- **Asistencia**: check-in manual con validación de vigencia e historial por día.
+- **Check-in QR**: credencial QR por socio y lector simulado de recepción.
+- **Pagos** y **Vencimientos**: recaudación, morosidad, próximos vencimientos y acciones rápidas.
 
-## Cómo ejecutar el proyecto
+---
 
-No requiere instalación ni servidor. Basta con abrir `index.html` en el
-navegador. Para evitar restricciones de algunos navegadores con `localStorage`
-al abrir archivos directamente, se recomienda servirlo con un servidor
-estático simple, por ejemplo:
+## 🚀 Puesta en marcha
+
+Requisitos: **Node.js 18+** y npm.
 
 ```bash
-# Con Python 3
-python3 -m http.server 8080
-
-# Luego visitar
-http://localhost:8080/index.html
+npm install      # instalar dependencias
+npm run dev      # entorno de desarrollo  → http://localhost:5173
+npm run build    # compilar para producción (carpeta dist/)
+npm run preview  # previsualizar el build de producción
+npm run lint     # revisar el estilo del código (ESLint)
 ```
 
-Desde el Dashboard existe un botón **"Reiniciar datos de ejemplo"** para volver
-al estado inicial en cualquier momento durante la demostración.
+---
 
-## Flujo de trabajo con Git y Git Flow
+## 🧱 Tecnologías
 
-El proyecto sigue el modelo Git Flow para el trabajo colaborativo:
+| Tecnología           | Uso                                                        |
+| -------------------- | ---------------------------------------------------------- |
+| React 19             | Librería de UI (componentes + hooks)                       |
+| Vite                 | Empaquetador y servidor de desarrollo                      |
+| React Router DOM 7   | Enrutado de la SPA (10 rutas)                              |
+| Context API + useReducer | Estado global del "club" (patrón tipo store)           |
+| Bootstrap 5 + bootstrap-icons | Grilla, utilidades, formularios y tipografía de iconos |
+| Chart.js + react-chartjs-2 | Gráfico de asistencia en el Dashboard                |
+| qrcode.react         | Generación de credenciales QR                              |
+| Open-Meteo API       | API pública para el clima (sin API key)                    |
 
-- `main`: versión estable, lista para presentar/entregar.
-- `develop`: integración de las funcionalidades terminadas.
-- `feature/<nombre>`: una rama por módulo o funcionalidad
-  (por ejemplo `feature/socios`, `feature/qr-checkin`, `feature/dashboard`).
-- `release/<version>`: estabilización previa a fusionar a `main`.
-- `hotfix/<nombre>`: correcciones urgentes sobre `main`.
+**No hay backend**: los datos se guardan en el `localStorage` del navegador y se "siembran"
+con datos de ejemplo la primera vez que se abre la app (ver `src/services/clubService.js`).
 
-Ejemplo de flujo para una nueva funcionalidad:
+---
 
-```bash
-git flow init                       # una sola vez, al iniciar el repositorio
-git flow feature start qr-checkin   # crea y cambia a feature/qr-checkin
-# ... desarrollo y commits ...
-git add .
-git commit -m "feat(qr): generar credencial QR y validar check-in"
-git flow feature finish qr-checkin  # fusiona a develop
-git push origin develop
-```
-
-Al cerrar el semestre/entrega:
-
-```bash
-git flow release start 1.0.0
-git flow release finish 1.0.0
-git push origin main develop --tags
-```
-
-### Convención de commits sugerida
+## 🗂️ Estructura del proyecto
 
 ```
-feat(socios): agregar formulario de alta de socio
-fix(membresias): corregir cálculo de días restantes
-style(css): ajustar paleta de badges de estado
-docs(readme): documentar estructura del proyecto
+src/
+├── components/
+│   ├── layout/          # Layout general y Sidebar (navegación)
+│   ├── ui/              # Componentes reutilizables (tabla, modal, tarjetas…)
+│   └── WeatherWidget.jsx
+├── context/
+│   ├── ClubContext.jsx  # Estado global (useReducer) + acciones
+│   └── ToastContext.jsx # Notificaciones
+├── data/
+│   └── iniciales.json   # Datos semilla de ejemplo
+├── hooks/
+│   └── useWeather.js
+├── pages/               # Una página por ruta
+├── services/
+│   ├── clubService.js   # Carga/guardado de datos (localStorage)
+│   ├── storage.js
+│   └── weatherApi.js    # Cliente de la API Open-Meteo
+├── styles/              # tokens.css + styles.css (identidad visual)
+└── utils/               # fechas, formato, reglas de negocio, ids
 ```
 
-## Posibles extensiones futuras
+---
 
-- Reemplazar `localStorage` por una API real (backend) para persistencia
-  multiusuario.
-- Escaneo de QR con cámara real (por ejemplo con la librería `html5-qrcode`)
-  en lugar de la entrada simulada.
-- Notificaciones automáticas (correo/WhatsApp) a socios próximos a vencer.
-- Roles de usuario (administrador / recepción) con inicio de sesión.
+## 🧭 Rutas
+
+| Ruta            | Módulo                     |
+| --------------- | -------------------------- |
+| `/`             | Dashboard (resumen general) |
+| `/socios`       | Socios (padrón + CRUD)      |
+| `/socios/:id`   | Historial de un socio       |
+| `/planes`       | Planes                      |
+| `/membresias`   | Membresías                  |
+| `/actividades`  | Actividades                 |
+| `/asistencia`   | Asistencia (check-in manual)|
+| `/qr`           | Check-in QR                 |
+| `/pagos`        | Pagos                       |
+| `/vencimientos` | Vencimientos                |
+
+---
+
+## 🎨 Identidad visual
+
+La interfaz usa el concepto de **"pizarra de marcador"** (tiza sobre pizarra). Los tokens de
+color y tipografía están en `src/styles/tokens.css` y se detallan en
+[`docs/diseno.md`](docs/diseno.md):
+
+- Verde cancha `#2F6844`, tinta `#14181C`, tiza `#F4F1EA`, ámbar `#E0932F`, alerta `#BD4438`,
+  acero `#6B7280`.
+- Tipografías: **Bebas Neue** (títulos, estilo marcador) e **Inter** (texto).
+
+---
+
+## 🌦️ API pública utilizada (Open-Meteo)
+
+| Ítem | Detalle |
+| ---- | ------- |
+| **Nombre** | Open-Meteo |
+| **Documentación oficial** | https://open-meteo.com/en/docs |
+| **Endpoint** | `https://api.open-meteo.com/v1/forecast` |
+| **Método HTTP** | `GET` |
+| **Parámetros** | `latitude`, `longitude`, `current_weather=true`, `timezone=auto` |
+| **Datos usados** | `current_weather.temperature`, `current_weather.windspeed`, `current_weather.weathercode`, `current_weather.time` |
+| **Dónde se muestra** | Widget **"Clima del campus"** en el Dashboard (`src/components/WeatherWidget.jsx`) |
+| **Autenticación / límites** | No requiere API key. Uso gratuito para fines no comerciales / bajo volumen |
+| **Licencia** | Datos bajo **CC-BY 4.0**; se da atribución a Open-Meteo en el widget |
+| **Cliente / Hook** | `src/services/weatherApi.js` · `src/hooks/useWeather.js` |
+
+Coordenadas configuradas: **Viña del Mar, Chile** (`-33.0246, -71.5518`).
+
+```
+https://api.open-meteo.com/v1/forecast?latitude=-33.0246&longitude=-71.5518&current_weather=true&timezone=auto
+```
+
+Respuesta (resumida):
+
+```json
+{
+  "latitude": -33.0246,
+  "longitude": -71.5518,
+  "current_weather": {
+    "temperature": 15.4,
+    "windspeed": 9.1,
+    "weathercode": 3,
+    "time": "2026-10-11T14:00"
+  }
+}
+```
+
+**Manejo de la respuesta y de errores**: el `weathercode` se traduce a un ícono y texto con
+`describirClima()`. La consulta usa `fetch` dentro de un `useEffect` y contempla tres estados:
+**cargando** (spinner), **error** (mensaje con **botón "Reintentar"** que vuelve a llamar a la
+API) y **listo**. Si `response.ok` es falso o falta `current_weather`, se lanza un error que se
+muestra en el widget.
+
+**Justificación funcional**: el club tiene actividades al aire libre (Funcional HIIT, Yoga).
+El clima permite mostrar en el Dashboard si conviene realizarlas o priorizar infraestructura
+techada, aportando una decisión operativa real y no un adorno.
+
+---
+
+## 🤖 Uso de Inteligencia Artificial
+
+### Reporte de IA
+
+| Herramienta | Propósito | Prompt representativo | Resultado | Modificación humana | Aprendizaje |
+| ----------- | --------- | --------------------- | --------- | ------------------- | ----------- |
+| Asistente de IA (modelo de lenguaje) | Andamiaje y planificación | *"Propón la estructura de carpetas, el modelo de datos y un reparto de módulos para migrar una app vanilla de gestión de club a React."* | Propuso la arquitectura por `components/pages/services/context` y el esquema de entidades | El equipo ajustó nombres, ids y decidió qué módulos asumía cada integrante | A organizar un proyecto por responsabilidades antes de escribir código |
+| Asistente de IA (modelo de lenguaje) | Redacción de código base | *"Genera utilidades para manejar fechas `YYYY-MM-DD` y una función que determine el estado de una membresía según los días restantes."* | `utils/dates.js` y `utils/business.js` con `estadoMembresia`, `diasRestantes` | Se fijó el umbral en 7 días y se probó con datos semilla | A traducir reglas de negocio a funciones puras y testeables |
+| Asistente de IA (modelo de lenguaje) | Debugging | *"Esta URL de fetch falla siempre, ¿qué está mal?"* | Detectó una URL mal formada (`open-meteo.com{LAT}` sin `api.`, `/v1/forecast` ni `latitude=`) | Se reescribió con `URLSearchParams` y se verificó en el navegador | A leer mensajes de error de red y a construir URLs con parámetros |
+| Asistente de IA (modelo de lenguaje) | Documentación | *"Redacta el README y un documento de diseño a partir de estas decisiones del equipo."* | Borradores que el equipo revisó y corrigió | Se completaron datos reales (colores, endpoints, integrantes) | A documentar un proyecto para terceros |
+
+**Control de calidad humano**: cada integrante revisó, ejecutó y validó el código
+(`npm run lint`, `npm run build` y pruebas manuales en el navegador), ajustó los datos de
+ejemplo y verificó que la lógica de negocio reflejara los requisitos del taller. Las decisiones
+de arquitectura (React Router, Context + useReducer, API de clima) fueron acordadas por el equipo.
+
+---
+
+## 🧠 Decisiones técnicas
+
+- **React Router** en lugar de un `useState('vistaActual')`: cada vista es una ruta real,
+  navegable y enlazable, con un `Layout` compartido.
+- **Context + useReducer** para el estado del club: centraliza las mutaciones en acciones y
+  evita "prop drilling"; un `useEffect` persiste cada cambio en `localStorage`.
+- **Componentes `ui/` presentacionales** (tabla, modal, tarjeta, badges) reutilizados por todas
+  las páginas, para evitar duplicación y mantener consistencia.
+- **Datos semilla deterministas**: las membresías/pagos/asistencias se generan por *offsets* de
+  fecha desde `iniciales.json`, así los estados activa/por vencer/vencida se demuestran siempre.
+- **Identidad visual propia** (CSS con variables) sobre Bootstrap, para no depender solo de
+  componentes prediseñados.
+
+---
+
+## ⚠️ Limitaciones conocidas
+
+- **Sin backend**: los datos viven en `localStorage`; no hay sincronización entre dispositivos
+  ni usuarios. "Reiniciar datos de ejemplo" en el Dashboard borra los cambios locales.
+- El **check-in QR es simulado** (lector por código/atajos), ya que no hay hardware ni servidor.
+- El **clima** corresponde a una ubicación fija (Viña del Mar), no a geolocalización del usuario.
+- No hay autenticación ni roles: la app asume un único entorno de administración.
+
+---
+
+## 👥 Integrantes y reparto
+
+| Integrante | Módulos / aportes                                                              |
+| ---------- | ------------------------------------------------------------------------------ |
+| Jorge      | Fundamentos (datos, contexto, router, estilos, UI base) + módulos "Club": Dashboard, Planes, Membresías, Actividades, Asistencia y Check-in QR |
+| Maxi       | Módulos "Control": Socios, Pagos, Vencimientos e Historial del socio + documentación |
+
+---
+
+## 🌿 Flujo de trabajo con Git (Git Flow)
+
+- `main`: versión estable (Actividad 1).
+- `develop`: rama de integración de la Entrega 2.
+- `feature/base-club`: fundamentos + módulos Club.
+- `feature/control-docs`: módulos Control + documentación.
+
+Los detalles de ramas, commits y Pull Requests están en [`docs/git-flow.md`](docs/git-flow.md).
+La guía de demostración y defensa técnica está en [`docs/defensa.md`](docs/defensa.md).
