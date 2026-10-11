@@ -1,0 +1,36 @@
+{
+  "socios": [
+    { "id": "S001", "nombre": "Camila Reyes", "email": "camila.reyes@mail.com", "telefono": "+56 9 8123 4501", "fechaIngresoOffset": -220 },
+    { "id": "S002", "nombre": "Matías Fuentes", "email": "matias.fuentes@mail.com", "telefono": "+56 9 8123 4502", "fechaIngresoOffset": -190 },
+    { "id": "S003", "nombre": "Valentina Soto", "email": "valentina.soto@mail.com", "telefono": "+56 9 8123 4503", "fechaIngresoOffset": -160 },
+    { "id": "S004", "nombre": "Benjamín Rojas", "email": "benjamin.rojas@mail.com", "telefono": "+56 9 8123 4504", "fechaIngresoOffset": -140 },
+    { "id": "S005", "nombre": "Francisca Muñoz", "email": "francisca.munoz@mail.com", "telefono": "+56 9 8123 4505", "fechaIngresoOffset": -95 },
+    { "id": "S006", "nombre": "Diego Castillo", "email": "diego.castillo@mail.com", "telefono": "+56 9 8123 4506", "fechaIngresoOffset": -70 },
+    { "id": "S007", "nombre": "Antonia Vargas", "email": "antonia.vargas@mail.com", "telefono": "+56 9 8123 4507", "fechaIngresoOffset": -45 },
+    { "id": "S008", "nombre": "Ignacio Herrera", "email": "ignacio.herrera@mail.com", "telefono": "+56 9 8123 4508", "fechaIngresoOffset": -20 },
+    { "id": "S009", "nombre": "Josefa Contreras", "email": "josefa.contreras@mail.com", "telefono": "+56 9 8123 4509", "fechaIngresoOffset": -10 }
+  ],
+  "planes": [
+    { "id": "P01", "nombre": "Plan Básico", "descripcion": "Acceso a sala de musculación en horario diurno.", "precio": 24990, "duracionDias": 30, "actividades": ["Musculación"] },
+    { "id": "P02", "nombre": "Plan Full", "descripcion": "Acceso ilimitado a todas las actividades del club.", "precio": 39990, "duracionDias": 30, "actividades": ["Musculación", "Funcional", "Spinning", "Yoga"] },
+    { "id": "P03", "nombre": "Plan Trimestral", "descripcion": "Plan Full con permanencia trimestral y descuento.", "precio": 99990, "duracionDias": 90, "actividades": ["Musculación", "Funcional", "Spinning", "Yoga"] },
+    { "id": "P04", "nombre": "Plan Estudiante", "descripcion": "Tarifa preferencial acreditando matrícula vigente.", "precio": 17990, "duracionDias": 30, "actividades": ["Musculación", "Funcional"] }
+  ],
+  "actividades": [
+    { "id": "A01", "nombre": "Musculación libre", "instructor": "Staff de sala", "horario": "Lun a Sáb · 07:00–22:00", "cupo": 40, "exterior": false },
+    { "id": "A02", "nombre": "Funcional HIIT", "instructor": "Rodrigo Paredes", "horario": "Lun / Mié / Vie · 19:00", "cupo": 18, "exterior": true },
+    { "id": "A03", "nombre": "Spinning", "instructor": "Camila Ortiz", "horario": "Mar / Jue · 08:00", "cupo": 20, "exterior": false },
+    { "id": "A04", "nombre": "Yoga", "instructor": "Paula Andrade", "horario": "Mar / Jue / Sáb · 09:30", "cupo": 15, "exterior": true }
+  ],
+  "membresiasSeed": [
+    { "socioId": "S001", "planId": "P02", "inicioOffset": -30, "actividadPreferida": "A02", "pagoEstado": "pagado", "metodo": "Transferencia" },
+    { "socioId": "S002", "planId": "P03", "inicioOffset": -60, "actividadPreferida": "A03", "pagoEstado": "pagado", "metodo": "Débito" },
+    { "socioId": "S003", "planId": "P01", "inicioOffset": -33, "actividadPreferida": "A01", "pagoEstado": "pendiente", "metodo": "—" },
+    { "socioId": "S004", "planId": "P02", "inicioOffset": -27, "actividadPreferida": "A04", "pagoEstado": "pagado", "metodo": "Transferencia" },
+    { "socioId": "S005", "planId": "P04", "inicioOffset": -14, "actividadPreferida": "A02", "pagoEstado": "pagado", "metodo": "Débito" },
+    { "socioId": "S006", "planId": "P01", "inicioOffset": -45, "actividadPreferida": "A01", "pagoEstado": "pendiente", "metodo": "—" },
+    { "socioId": "S007", "planId": "P02", "inicioOffset": -5, "actividadPreferida": "A03", "pagoEstado": "pagado", "metodo": "Transferencia" },
+    { "socioId": "S008", "planId": "P04", "inicioOffset": -3, "actividadPreferida": "A01", "pagoEstado": "pagado", "metodo": "Efectivo" },
+    { "socioId": "S009", "planId": "P02", "inicioOffset": -1, "actividadPreferida": "A04", "pagoEstado": "pagado", "metodo": "Transferencia" }
+  ]
+}

@@ -1,0 +1,383 @@
+@import './tokens.css';
+
+/* =========================================================
+   ClubTrack — styles.css
+   Sistema de diseño propio (complementa Bootstrap 5).
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--chalk);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+h1,
+h2,
+h3,
+.display,
+.scoreboard-num {
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+h1 { font-size: 2.3rem; line-height: 1.05; }
+h2 { font-size: 1.6rem; line-height: 1.1; }
+h3 { font-size: 1.2rem; line-height: 1.15; }
+
+a { color: var(--court-dark); text-decoration: none; }
+a:hover { color: var(--court); }
+
+.text-steel { color: var(--steel) !important; }
+.text-court { color: var(--court) !important; }
+.text-alert { color: var(--alert) !important; }
+
+/* ---------- Estructura: sidebar + main ---------- */
+.app-shell { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  background: var(--ink);
+  color: var(--chalk-dim);
+  display: flex;
+  flex-direction: column;
+  padding: 22px 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar .brand {
+  padding: 0 22px 18px;
+  border-bottom: 1px solid rgba(244, 241, 234, 0.1);
+  margin-bottom: 12px;
+}
+.sidebar .brand .mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px; height: 34px;
+  background: var(--amber);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  border-radius: 3px;
+  margin-right: 8px;
+}
+.sidebar .brand .name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--paper);
+  letter-spacing: 0.03em;
+  vertical-align: middle;
+}
+.sidebar .brand .sub {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--steel-light);
+  margin-top: 4px;
+}
+
+.sidebar nav { flex: 1; padding: 6px 12px; }
+.sidebar .nav-section-label {
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  color: var(--steel-light);
+  padding: 14px 12px 6px;
+}
+.sidebar .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 4px;
+  color: var(--chalk-dim);
+  font-size: 0.9rem;
+  border-left: 3px solid transparent;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.sidebar .nav-link:hover { background: rgba(244, 241, 234, 0.08); color: var(--paper); }
+.sidebar .nav-link.active {
+  background: rgba(224, 147, 47, 0.14);
+  border-left-color: var(--amber);
+  color: var(--paper);
+  font-weight: 600;
+}
+.sidebar .foot {
+  padding: 14px 22px 0;
+  border-top: 1px solid rgba(244, 241, 234, 0.1);
+  font-size: 0.72rem;
+  color: var(--steel-light);
+}
+
+.main { flex: 1; padding: 26px 32px 48px; min-width: 0; }
+
+/* ---------- Encabezado de página ---------- */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.page-header .kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.7rem;
+  color: var(--steel);
+  font-weight: 600;
+}
+.page-header h1 { margin: 2px 0 4px; }
+.page-header .lead-sub { color: var(--steel); margin: 0; font-size: 0.9rem; }
+
+/* ---------- Tarjetas ---------- */
+.card-flat {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.stat-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--court);
+  border-radius: var(--radius-card);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-card);
+}
+.stat-card .label {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+  color: var(--steel);
+  font-weight: 600;
+}
+.stat-card .value {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1.1;
+  margin-top: 4px;
+}
+.stat-card .delta { font-size: 0.78rem; color: var(--steel); }
+.stat-card.amber { border-left-color: var(--amber); }
+.stat-card.alert { border-left-color: var(--alert); }
+.stat-card.steel { border-left-color: var(--steel); }
+
+/* ---------- Tablas ---------- */
+.table-club { width: 100%; border-collapse: collapse; }
+.table-club thead th {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.68rem;
+  color: var(--steel);
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  font-weight: 700;
+}
+.table-club tbody td {
+  padding: 11px 12px;
+  border-bottom: 1px solid var(--chalk-dim);
+  font-size: 0.88rem;
+  vertical-align: middle;
+}
+.table-club tbody tr:hover { background: rgba(220, 234, 225, 0.35); }
+.table-club tbody tr:last-child td { border-bottom: none; }
+
+/* ---------- Badges de estado ---------- */
+.badge-estado {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.badge-estado::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.badge-activa { background: var(--court-light); color: var(--court-dark); }
+.badge-por_vencer { background: var(--amber-light); color: #9a5f10; }
+.badge-vencida { background: var(--alert-light); color: var(--alert); }
+.badge-pagado { background: var(--court-light); color: var(--court-dark); }
+.badge-pendiente { background: var(--amber-light); color: #9a5f10; }
+
+/* ---------- Barras ---------- */
+.bar-track {
+  height: 8px;
+  background: var(--chalk-dim);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+.bar-fill { height: 100%; background: var(--court); border-radius: var(--radius-pill); }
+
+/* ---------- Botones ---------- */
+.btn-outline-club {
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 3px;
+  padding: 8px 14px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+.btn-outline-club:hover { border-color: var(--court); color: var(--court-dark); }
+.btn-solid {
+  background: var(--court);
+  border: 1px solid var(--court-dark);
+  color: #fff;
+  border-radius: 3px;
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 0.86rem;
+}
+.btn-solid:hover { background: var(--court-dark); color: #fff; }
+.btn-solid:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-ghost-sm {
+  border: none;
+  background: transparent;
+  color: var(--steel);
+  padding: 4px 8px;
+  border-radius: 3px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.btn-ghost-sm:hover { background: var(--chalk-dim); color: var(--ink); }
+
+/* ---------- Piezas de apoyo ---------- */
+.empty-state {
+  text-align: center;
+  padding: 42px 16px;
+  color: var(--steel);
+}
+.empty-state i { font-size: 2rem; display: block; margin-bottom: 10px; opacity: 0.6; }
+
+.spinner-club {
+  width: 26px; height: 26px;
+  border: 3px solid var(--chalk-dim);
+  border-top-color: var(--court);
+  border-radius: 50%;
+  animation: ct-spin 0.8s linear infinite;
+}
+@keyframes ct-spin { to { transform: rotate(360deg); } }
+
+/* ---------- Modal ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 24, 28, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1050;
+}
+.modal-card {
+  background: var(--paper);
+  border-radius: var(--radius-card);
+  width: 100%;
+  max-width: 520px;
+  box-shadow: var(--shadow-pop);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.modal-card header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-card .body { padding: 20px; }
+.modal-card footer {
+  padding: 14px 20px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+/* ---------- Toasts ---------- */
+.toast-area {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.toast-item {
+  min-width: 240px;
+  padding: 12px 16px;
+  border-radius: var(--radius-card);
+  color: #fff;
+  font-size: 0.88rem;
+  box-shadow: var(--shadow-pop);
+  animation: ct-slide 0.2s ease;
+}
+.toast-success { background: var(--court); }
+.toast-error { background: var(--alert); }
+@keyframes ct-slide {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Check-in QR ---------- */
+.qr-credential {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 18px;
+  background: var(--paper);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-card);
+}
+.scan-result {
+  border-radius: var(--radius-card);
+  padding: 14px 16px;
+  font-size: 0.9rem;
+  border: 1px solid transparent;
+}
+.scan-result.ok { background: var(--court-light); border-color: var(--court); color: var(--court-dark); }
+.scan-result.fail { background: var(--alert-light); border-color: var(--alert); color: var(--alert); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .app-shell { flex-direction: column; }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    flex-direction: column;
+  }
+  .sidebar nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .sidebar .nav-section-label { width: 100%; padding-bottom: 2px; }
+  .sidebar .nav-link { border-left: none; border-bottom: 3px solid transparent; }
+  .sidebar .nav-link.active { border-left: none; border-bottom-color: var(--amber); }
+  .main { padding: 18px 16px 40px; }
+}
