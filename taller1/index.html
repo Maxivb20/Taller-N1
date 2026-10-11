@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard · ClubTrack</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div id="toast-area" style="position:fixed; top:16px; right:16px; z-index:2000;"></div>
+
+<div class="app-shell">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="mark">CT</span><span class="name">ClubTrack</span>
+      <span class="sub">Gestión de membresías y asistencia</span>
+    </div>
+    <nav>
+      <div class="nav-section-label">PRINCIPAL</div>
+      <a href="index.html" class="nav-link"><i class="bi bi-speedometer2"></i> Dashboard</a>
+      <a href="qr.html" class="nav-link"><i class="bi bi-qr-code"></i> Check-in QR</a>
+      <div class="nav-section-label">CLUB</div>
+      <a href="socios.html" class="nav-link"><i class="bi bi-people"></i> Socios</a>
+      <a href="planes.html" class="nav-link"><i class="bi bi-card-list"></i> Planes</a>
+      <a href="membresias.html" class="nav-link"><i class="bi bi-patch-check"></i> Membresías</a>
+      <a href="actividades.html" class="nav-link"><i class="bi bi-calendar-week"></i> Actividades</a>
+      <div class="nav-section-label">CONTROL</div>
+      <a href="asistencia.html" class="nav-link"><i class="bi bi-clipboard-check"></i> Asistencia</a>
+      <a href="pagos.html" class="nav-link"><i class="bi bi-cash-coin"></i> Pagos</a>
+      <a href="vencimientos.html" class="nav-link"><i class="bi bi-exclamation-triangle"></i> Vencimientos</a>
+    </nav>
+    <div class="foot">ClubTrack v1.0<br>Proyecto académico</div>
+  </aside>
+
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <div class="kicker">Resumen general</div>
+        <h1>Dashboard</h1>
+        <p class="lead-sub">Estado del club al día de hoy, <span id="hoy-label"></span>.</p>
+      </div>
+      <button class="btn btn-outline-club" onclick="reiniciarDatos()"><i class="bi bi-arrow-counterclockwise me-1"></i>Reiniciar datos de ejemplo</button>
+    </div>
+
+    <div class="row g-3 mb-4">
+      <div class="col-sm-6 col-lg-3">
+        <div class="stat-card">
+          <div class="label">Socios activos</div>
+          <div class="value" id="stat-activos">—</div>
+          <div class="delta" id="stat-activos-sub">de <span id="stat-total-socios">—</span> socios totales</div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="stat-card amber">
+          <div class="label">Por vencer (≤ 7 días)</div>
+          <div class="value" id="stat-por-vencer">—</div>
+          <div class="delta">Requieren gestión de renovación</div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="stat-card alert">
+          <div class="label">Morosidad</div>
+          <div class="value" id="stat-morosidad">—</div>
+          <div class="delta" id="stat-morosidad-sub">pagos pendientes</div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <div class="stat-card steel">
+          <div class="label">Check-ins hoy</div>
+          <div class="value" id="stat-checkins-hoy">—</div>
+          <div class="delta">Registrados vía QR y manual</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-lg-7">
+        <div class="card-flat p-3 h-100">
+          <h3 class="mb-1">Asistencia — últimos 7 días</h3>
+          <p class="text-steel mb-3" style="font-size:0.85rem;">Check-ins totales registrados por día.</p>
+          <canvas id="chart-asistencia" height="160"></canvas>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="card-flat p-3 h-100">
+          <h3 class="mb-1">Membresías por estado</h3>
+          <p class="text-steel mb-3" style="font-size:0.85rem;">Distribución actual de la cartera de socios.</p>
+          <div id="estado-bars"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-flat p-3 mt-3">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h3 class="mb-0">Últimos check-in</h3>
+        <a href="asistencia.html" class="btn-ghost-sm">Ver todos <i class="bi bi-arrow-right"></i></a>
+      </div>
+      <div class="table-responsive">
+        <table class="table-club">
+          <thead>
+            <tr><th>Socio</th><th>Actividad</th><th>Fecha</th><th>Hora</th><th>Método</th></tr>
+          </thead>
+          <tbody id="tabla-ultimos-checkins"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>
