@@ -182,12 +182,7 @@ VITE_API_URL=http://localhost:4000/api
 
 ## Pruebas realizadas y limitaciones conocidas
 
-### Pruebas automatizadas y funcionales
-- **Suite de pruebas automatizadas en el backend (`npm test`)**: en `backend/src/tests/validators.test.js` se incluyen pruebas con `node:test` para verificar las validaciones de entrada (socios, planes, actividades, instructores, inscripciones, pagos y check-in) y las reglas de vigencia (`activa`, `por_vencer`, `vencida`). Se ejecutan con:
-  ```bash
-  cd backend
-  npm test
-  ```
+### Pruebas verificadas
 - **Flujo completo en PostgreSQL**: registro de un nuevo socio → alta de membresía (crea membresía y pago pendiente con comprobante en una transacción SQL) → confirmación del pago → recarga del navegador (F5) verificando que los cambios persisten.
 - **Validaciones y reglas de negocio**:
   - Inscribir en una actividad a un socio con membresía vencida (`S003` — Valentina Soto) devuelve `HTTP 422` y muestra la alerta en el modal.
