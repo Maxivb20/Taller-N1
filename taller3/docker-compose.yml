@@ -1,0 +1,74 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: clubtrack-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${PG_USER:-clubtrack}
+      POSTGRES_PASSWORD: ${PG_PASSWORD:-clubtrack_pass}
+      POSTGRES_DB: ${PG_DATABASE:-clubtrack_db}
+    ports:
+      - "${PG_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./backend/src/db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PG_USER:-clubtrack} -d ${PG_DATABASE:-clubtrack_db}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  mongodb:
+    image: mongo:7
+    container_name: clubtrack-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodata:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: clubtrack-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    environment:
+      PORT: 4000
+      NODE_ENV: development
+      PG_HOST: postgres
+      PG_PORT: 5432
+      PG_USER: ${PG_USER:-clubtrack}
+      PG_PASSWORD: ${PG_PASSWORD:-clubtrack_pass}
+      PG_DATABASE: ${PG_DATABASE:-clubtrack_db}
+      MONGO_URI: mongodb://mongodb:27017/clubtrack_nosql
+      CORS_ORIGIN: http://localhost:5173
+    ports:
+      - "4000:4000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: clubtrack-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    environment:
+      VITE_API_URL: http://localhost:4000/api
+    ports:
+      - "5173:5173"
+
+volumes:
+  pgdata:
+  mongodata:

@@ -1,0 +1,22 @@
+{
+  "name": "clubtrack-backend",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Backend API REST para ClubTrack (Hito 3) con PostgreSQL, MongoDB y Swagger/OpenAPI",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "seed": "node src/db/runSeed.js",
+    "test": "node --test src/tests/*.test.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.10.0",
+    "pg": "^8.13.3",
+    "swagger-ui-express": "^5.0.1"
+  }
+}
